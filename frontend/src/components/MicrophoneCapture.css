@@ -1,14 +1,14 @@
 .microphone-capture {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
 }
 
 .microphone-capture h3 {
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
   color: #61dafb;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .permission-section {
@@ -19,9 +19,9 @@
   background: linear-gradient(45deg, #61dafb, #21a0c4);
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -51,14 +51,14 @@
 .recording-controls {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
   align-items: center;
   width: 100%;
 }
 
 .audio-level {
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
 }
 
 .level-bar {
@@ -88,13 +88,13 @@
   background: linear-gradient(45deg, #4caf50, #45a049);
   color: white;
   border: none;
-  padding: 15px 30px;
-  border-radius: 50px;
-  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 200px;
+  min-width: 150px;
 }
 
 .record-btn:hover {

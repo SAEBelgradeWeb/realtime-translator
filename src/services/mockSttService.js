@@ -19,9 +19,9 @@ class MockSTTService {
     
     this.currentIndex = 0;
     this.lastProcessTime = 0;
-    this.minInterval = 2000; // Minimum 2 seconds between responses
+    this.minInterval = 1000; // Minimum 1 second between responses (faster for testing)
     this.audioBuffer = Buffer.alloc(0);
-    this.bufferThreshold = 16000; // Simulate processing after 16KB of audio
+    this.bufferThreshold = 1000; // Simulate processing after 1KB of audio (much lower threshold)
   }
 
   /**

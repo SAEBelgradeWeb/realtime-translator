@@ -24,6 +24,9 @@ const SubtitleDisplay: React.FC<SubtitleDisplayProps> = ({ subtitles, config }) 
     return 'Low';
   };
 
+  // Get the latest subtitle for main display
+  const latestSubtitle = subtitles.length > 0 ? subtitles[subtitles.length - 1] : null;
+
   return (
     <div className="subtitle-display">
       <div className="subtitle-header">
@@ -50,39 +53,70 @@ const SubtitleDisplay: React.FC<SubtitleDisplayProps> = ({ subtitles, config }) 
             </p>
           </div>
         ) : (
-          <div className="subtitles-list">
-            {subtitles.map((subtitle) => (
-              <div key={subtitle.id} className="subtitle-item">
+          <div className="film-subtitles">
+            {/* Main subtitle display - like film subtitles */}
+            <div className="current-subtitle">
+              {latestSubtitle && (
                 <div className="subtitle-content">
                   <div className="subtitle-text">
-                    {subtitle.text}
+                    {latestSubtitle.text}
                   </div>
                   
-                  {subtitle.translatedText && config?.enableTranslation && (
+                  {latestSubtitle.translatedText && config?.enableTranslation && (
                     <div className="subtitle-translation">
-                      {subtitle.translatedText}
+                      {latestSubtitle.translatedText}
                     </div>
                   )}
                   
                   <div className="subtitle-meta">
                     <span className="subtitle-timestamp">
-                      {formatTimestamp(subtitle.timestamp)}
+                      {formatTimestamp(latestSubtitle.timestamp)}
                     </span>
                     
                     <span 
                       className="subtitle-confidence"
-                      style={{ color: getConfidenceColor(subtitle.confidence) }}
+                      style={{ color: getConfidenceColor(latestSubtitle.confidence) }}
                     >
-                      {getConfidenceText(subtitle.confidence)} ({Math.round(subtitle.confidence * 100)}%)
+                      {getConfidenceText(latestSubtitle.confidence)} ({Math.round(latestSubtitle.confidence * 100)}%)
                     </span>
                     
                     <span className="subtitle-language">
-                      {subtitle.language?.toUpperCase()}
+                      {latestSubtitle.language?.toUpperCase()}
                     </span>
                   </div>
                 </div>
+              )}
+            </div>
+
+            {/* Recent subtitles list - scrollable */}
+            <div className="recent-subtitles">
+              <h4>Recent Subtitles</h4>
+              <div className="subtitles-list">
+                {subtitles.slice(-5).reverse().map((subtitle) => (
+                  <div key={subtitle.id} className="subtitle-item">
+                    <div className="subtitle-text-small">
+                      {subtitle.text}
+                    </div>
+                    {subtitle.translatedText && config?.enableTranslation && (
+                      <div className="subtitle-translation-small">
+                        {subtitle.translatedText}
+                      </div>
+                    )}
+                    <div className="subtitle-meta-small">
+                      <span className="subtitle-timestamp">
+                        {formatTimestamp(subtitle.timestamp)}
+                      </span>
+                      <span 
+                        className="subtitle-confidence"
+                        style={{ color: getConfidenceColor(subtitle.confidence) }}
+                      >
+                        {Math.round(subtitle.confidence * 100)}%
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         )}
       </div>

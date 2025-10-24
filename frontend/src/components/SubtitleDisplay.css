@@ -8,22 +8,22 @@
 }
 
 .subtitle-header {
-  padding: 20px;
+  padding: 8px 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.05);
 }
 
 .subtitle-header h3 {
-  margin: 0 0 10px 0;
+  margin: 0 0 5px 0;
   color: #61dafb;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .subtitle-info {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .subtitle-count {
@@ -38,7 +38,9 @@
 .subtitles-container {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .no-subtitles {
@@ -65,6 +67,127 @@
 .subtitle-hint {
   font-size: 0.9rem !important;
   opacity: 0.7;
+}
+
+/* Film subtitle layout */
+.film-subtitles {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+}
+
+.current-subtitle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 30px;
+  border: 2px solid rgba(97, 218, 251, 0.3);
+  animation: subtitleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes subtitleGlow {
+  from {
+    border-color: rgba(97, 218, 251, 0.3);
+    box-shadow: 0 0 10px rgba(97, 218, 251, 0.1);
+  }
+  to {
+    border-color: rgba(97, 218, 251, 0.6);
+    box-shadow: 0 0 20px rgba(97, 218, 251, 0.2);
+  }
+}
+
+.current-subtitle .subtitle-content {
+  text-align: center;
+  max-width: 100%;
+}
+
+.current-subtitle .subtitle-text {
+  font-size: 2rem;
+  line-height: 1.4;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.current-subtitle .subtitle-translation {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: #61dafb;
+  font-style: italic;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.current-subtitle .subtitle-meta {
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.recent-subtitles {
+  flex: 0 0 auto;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.recent-subtitles h4 {
+  margin: 0 0 15px 0;
+  color: #61dafb;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.recent-subtitles .subtitles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recent-subtitles .subtitle-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  padding: 10px;
+  border-left: 3px solid #61dafb;
+  animation: slideInSmall 0.2s ease-out;
+}
+
+@keyframes slideInSmall {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.subtitle-text-small {
+  font-size: 1rem;
+  line-height: 1.3;
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.subtitle-translation-small {
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #61dafb;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.subtitle-meta-small {
+  display: flex;
+  gap: 10px;
+  font-size: 0.7rem;
+  color: #999;
+  flex-wrap: wrap;
 }
 
 .subtitles-list {
@@ -140,15 +263,15 @@
 }
 
 .subtitle-footer {
-  padding: 15px 20px;
+  padding: 8px 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.02);
 }
 
 .service-info {
   display: flex;
-  gap: 20px;
-  font-size: 0.8rem;
+  gap: 15px;
+  font-size: 0.7rem;
   color: #999;
   flex-wrap: wrap;
 }
@@ -160,21 +283,25 @@
 }
 
 /* Scrollbar styling */
-.subtitles-container::-webkit-scrollbar {
+.subtitles-container::-webkit-scrollbar,
+.recent-subtitles::-webkit-scrollbar {
   width: 8px;
 }
 
-.subtitles-container::-webkit-scrollbar-track {
+.subtitles-container::-webkit-scrollbar-track,
+.recent-subtitles::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
 
-.subtitles-container::-webkit-scrollbar-thumb {
+.subtitles-container::-webkit-scrollbar-thumb,
+.recent-subtitles::-webkit-scrollbar-thumb {
   background: rgba(97, 218, 251, 0.5);
   border-radius: 4px;
 }
 
-.subtitles-container::-webkit-scrollbar-thumb:hover {
+.subtitles-container::-webkit-scrollbar-thumb:hover,
+.recent-subtitles::-webkit-scrollbar-thumb:hover {
   background: rgba(97, 218, 251, 0.7);
 }
 
@@ -196,12 +323,28 @@
     padding: 15px;
   }
   
-  .subtitle-text {
-    font-size: 1.1rem;
+  .current-subtitle {
+    padding: 20px;
   }
   
-  .subtitle-translation {
-    font-size: 1rem;
+  .current-subtitle .subtitle-text {
+    font-size: 1.5rem;
+  }
+  
+  .current-subtitle .subtitle-translation {
+    font-size: 1.2rem;
+  }
+  
+  .recent-subtitles {
+    max-height: 150px;
+  }
+  
+  .subtitle-text-small {
+    font-size: 0.9rem;
+  }
+  
+  .subtitle-translation-small {
+    font-size: 0.8rem;
   }
   
   .subtitle-meta {

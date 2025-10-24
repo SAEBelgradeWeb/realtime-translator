@@ -11,8 +11,8 @@ class TitlingHandler extends EventEmitter {
     
     // Configuration
     this.maxBufferSize = 1024 * 1024; // 1MB max buffer per connection
-    this.chunkSize = 4096; // Process audio in 4KB chunks
-    this.processingInterval = 100; // Process every 100ms
+    this.chunkSize = 1000; // Process audio in 1KB chunks (smaller for faster processing)
+    this.processingInterval = 500; // Process every 500ms (less frequent but more reliable)
   }
 
   handleConnection(ws) {

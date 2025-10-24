@@ -75,7 +75,7 @@ export const useWebSocket = (url: string): UseWebSocketReturn => {
         socket.close(1000, 'Component unmounting');
       }
     };
-  }, [connect, socket]);
+  }, [url]); // Only depend on url, not connect or socket
 
   return {
     socket,

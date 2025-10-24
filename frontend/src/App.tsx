@@ -17,7 +17,7 @@ function App() {
     isConnected: wsConnected, 
     sendMessage, 
     lastMessage 
-  } = useWebSocket('ws://localhost:3001/ws');
+  } = useWebSocket('wss://cfe9a7ee99aa.ngrok-free.app/ws');
 
   // Handle WebSocket connection status
   useEffect(() => {
@@ -34,22 +34,38 @@ function App() {
           case 'connected':
             setConnectionId(message.connectionId);
             setConfig(message.config);
+            console.log('✅ Connected to server:', message.message);
+            break;
+          
+          case 'stream_started':
+            console.log('🎤 Audio streaming started:', message.message);
+            break;
+          
+          case 'stream_stopped':
+            console.log('⏹️ Audio streaming stopped:', message.message);
             break;
           
           case 'subtitle':
-            setSubtitles(prev => {
-              const newSubtitles = [...prev, message.data];
-              // Keep only last 10 subtitles
-              return newSubtitles.slice(-10);
-            });
+            console.log('🎬 Received subtitle:', message.data?.text);
+            if (message.data) {
+              setSubtitles(prev => {
+                const newSubtitles = [...prev, message.data];
+                // Keep only last 10 subtitles
+                return newSubtitles.slice(-10);
+              });
+            }
             break;
           
           case 'error':
-            console.error('WebSocket error:', message.message);
+            console.error('❌ WebSocket error:', message.message);
+            break;
+          
+          case 'pong':
+            console.log('🏓 Received pong');
             break;
           
           default:
-            console.log('Unknown message type:', message.type);
+            console.log('❓ Unknown message type:', message.type, message);
         }
       } catch (error) {
         console.error('Error parsing WebSocket message:', error);
@@ -61,7 +77,7 @@ function App() {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const response = await fetch('/api/config');
+        const response = await fetch('https://cfe9a7ee99aa.ngrok-free.app/api/config');
         const configData = await response.json();
         setConfig(configData);
       } catch (error) {
